@@ -1,0 +1,13 @@
+.timeselector
+{
+    padding: 15px;
+    
+    border-radius: 5px;
+    font-size: 2.5em;
+    
+    background: #eee;
+}
+.timeselector a
+{
+    padding: 5px;
+}

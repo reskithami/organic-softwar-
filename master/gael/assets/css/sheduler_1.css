@@ -1,0 +1,144 @@
+
+#planner * {
+  list-style-type: none;
+  box-sizing: content-box;
+}
+#planner {
+  width: 394px;
+  margin: 100px auto;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+}
+#planner .calendar {
+  padding: 10px;
+  background-color: #333333;
+}
+#planner .calendar-header {
+  color: #a7a7a7;
+  margin: 0;
+  padding: 0;
+  text-align: justify;
+  line-height: 0px;
+  font-size: 0px;
+  padding-bottom: 10px;
+}
+#planner .calendar-header span,
+#planner .calendar-header a {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: 200;
+  text-align: center;
+  line-height: 36px;
+}
+#planner span.year{
+  display: block;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: center;
+  border-bottom: 1px solid #484848;
+}
+#planner .calendar-header a:hover {
+  color: #98cd60;
+  cursor: pointer;
+}
+#planner .calendar-header::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+#planner table {
+  width: 100%;
+  padding: 10px;
+  color: #9d9d9d;
+}
+#planner th {
+  font-weight: normal;
+  font-size: 14px;
+  color: #5b5b5b;
+}
+#planner td {
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
+}
+#planner td > span {
+  display: inline-block;
+  text-align: center;
+  padding: 3px;
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+#planner td > span:hover {
+  font-weight: bold;
+}
+#planner td > span.now {
+  color:pink;
+  font-weight: bold;
+}
+#planner td > span.active2 {
+  border-radius: 30px;
+  box-shadow: 
+	0 0 0 1px #98cd60;
+}
+#planner td > span.active4 {
+  border-radius: 30px;
+  box-shadow: 
+	0 0 0 1px #fa0;
+}
+#planner td > span.active8 {
+  border-radius: 30px;
+  box-shadow: 
+	0 0 0 1px red;
+}
+
+#planner td > span.active6 {
+  border-radius: 30px;
+  box-shadow: 
+	0 0 0 1px #98cd60,
+	0 0 0 2px #fa0;
+}
+
+#planner td > span.active10 {
+  border-radius: 30px;
+  box-shadow: 
+	0 0 0 2px #98cd60,
+	0 0 0 3px red;
+}
+
+#planner td > span.active12 {
+  border-radius: 30px;
+  box-shadow: 
+	0 0 0 2px #fa0,
+	0 0 0 3px red;
+}
+#planner td > span.active14 {
+  border-radius: 30px;
+  box-shadow: 
+	0 0 0 1px #fa0,
+	0 0 0 2px red,
+	0 0 0 3px #98cd60;
+}
+
+
+
+#planner div.panel
+{
+    background: #eee;
+}
+#planner label {
+  padding: 10px 20px;
+  color: #98cd60;
+  background: #333333;
+  border-radius: 5px;
+  transition: 0.3s ease all;
+  display: block;  
+}
+
+#planner label .hour {
+  display: block;
+  text-align: left;
+  
+}

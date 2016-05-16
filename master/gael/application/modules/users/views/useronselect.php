@@ -1,0 +1,2 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
+<select class="select_users_form_group form-control" name="select_users_form_group"><?php foreach($users as $k => $row):?><option value="<?php echo $row->user_id ?>"><?php echo $row->first_name. ' ' . $row->last_name; ?></option><?php endforeach;?></select>
