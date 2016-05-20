@@ -41,54 +41,45 @@
                         	<th><?php echo $this->lang->line('invoice_no');?></th>
 							<th><?php echo $this->lang->line('invoice_prefix');?></th>
 							<th><?php echo $this->lang->line('order_status_array');?></th>
-							<th><?php echo $this->lang->line('customer');?></th>
 							<th><?php echo $this->lang->line('saller');?></th>
 							<th><?php echo $this->lang->line('firstname');?></th>
 							<th><?php echo $this->lang->line('lastname');?></th>
 							<th><?php echo $this->lang->line('email');?></th>
 							<th><?php echo $this->lang->line('phone');?></th>
-							<th><?php echo $this->lang->line('payment_firstname');?></th>
-							<th><?php echo $this->lang->line('payment_lastname');?></th>
-							<th><?php echo $this->lang->line('payment_company');?></th>
-							<th><?php echo $this->lang->line('comment');?></th>
 							<th><?php echo $this->lang->line('total');?></th>
-							<th><?php echo $this->lang->line('commission');?></th>
-							<th><?php echo $this->lang->line('tracking');?></th>
-							<th><?php echo $this->lang->line('language_code');?></th>
-							<th><?php echo $this->lang->line('currency_code');?></th>
-							<th><?php echo $this->lang->line('currency_value');?></th>
-							<th><?php echo $this->lang->line('ip');?></th>
 							<th><?php echo $this->lang->line('date_added');?></th>
 							<th><?php echo $this->lang->line('date_modified');?></th>
 							<th>Action</th>
 						</tr>
                     </thead>
                     <tbody>
-	                    <?php                                                    
+	                    <?php   
+                            
+                            $total_cours = 0;
+                            $total_location = 0;
+                            $total_vente = 0;
 						    $num = 0; if(isset($order_records)) :foreach($order_records as $row): $num++;
+                                                    
+                            $sum_cours =  Modules::run('order_product/_get_total_from_order_and_type', $row->order_id, 'cours');
+                            $sum_location =  Modules::run('order_product/_get_total_from_order_and_type', $row->order_id, 'location');
+                            $sum_vente =  Modules::run('order_product/_get_total_from_order_and_type', $row->order_id, 'vente');
+                            
+                            $total_cours += $sum_cours;
+                            $total_location += $sum_location;
+                            $total_vente += $sum_vente;
+                                                    
 						?>
 						<tr>
 							<td></td>
 							<td><?php echo $row->invoice_no; ?></td>
 							<td><?php echo $row->invoice_prefix; ?></td>
 							<td><?php echo $row->order_status_array_id; ?></td>
-							<td><?php echo $row->customer_first_name; ?></td>
 							<td><?php echo $row->saller_first_name; ?></td>
 							<td><?php echo $row->firstname; ?></td>
 							<td><?php echo $row->lastname; ?></td>
 							<td><?php echo $row->email; ?></td>
 							<td><?php echo $row->phone; ?></td>
-							<td><?php echo $row->payment_firstname; ?></td>
-							<td><?php echo $row->payment_lastname; ?></td>
-							<td><?php echo $row->payment_company; ?></td>
-							<td><?php echo $row->comment; ?></td>
 							<td><?php echo $row->total; ?></td>
-							<td><?php echo $row->commission; ?></td>
-							<td><?php echo $row->tracking; ?></td>
-							<td><?php echo $row->language_code; ?></td>
-							<td><?php echo $row->currency_code; ?></td>
-							<td><?php echo $row->currency_value; ?></td>
-							<td><?php echo $row->ip; ?></td>
 							<td><?php echo $row->date_added; ?></td>
 							<td><?php echo $row->date_modified; ?></td>
 							<td>
@@ -102,7 +93,12 @@
 						<?php endif; ?>
                     </tbody>
             	</table>
+                          
             <div class="col-md-6 text-right">
-                <?php echo $pagination; ?>
-            </div>
+                <?php //echo $pagination; ?>
+            </div>  
 			</div>
+                <?php echo $this->lang->line('total_cours') . '  ' . numberformat($total_cours, $this->lang->lang());?>
+                <?php echo $this->lang->line('total_location') . '  ' . numberformat($total_location, $this->lang->lang());?>
+                <?php echo $this->lang->line('total_vente') . '  ' . numberformat($total_vente, $this->lang->lang());?>
+                <?php echo $this->lang->line('total') . '  ' . numberformat($total_price->total, $this->lang->lang());?>

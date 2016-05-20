@@ -128,6 +128,7 @@ $lang['first_name'] = 'First Name';
 $lang['last_name'] = 'Last Name';
 $lang['company'] = 'Company';
 $lang['phone'] = 'Phone';
+$lang['code_id'] = 'Numero Identite';
 
 		
 		// MODULES order
@@ -199,6 +200,12 @@ $lang['payed'] = 'Payé';
 $lang['delete'] = 'Supprimer';
 $lang['date_start'] = 'Date de debut';
 $lang['date_end'] = 'Date de fin';
+
+
+$lang['total_cours'] = 'Total Cours';
+$lang['total_location'] = 'Total Location';
+$lang['total_vente'] = 'Total Vente';
+
 
 
 $lang['users'] = 'Utilisateur';

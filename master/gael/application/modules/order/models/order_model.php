@@ -85,7 +85,7 @@ class Order_model extends MY_Sublimemodel {
                 if ($where)
                     $this->db->where($where);
 		
-                $this->db->limit($limit, $start);
+                //$this->db->limit($limit, $start);
                 
 		return $this->order_info()->get()->result();
 	}

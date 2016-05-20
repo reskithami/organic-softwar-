@@ -37,6 +37,7 @@ $lang['index_subheading']        = 'Ci-dessous se trouve la liste des utilisateu
 $lang['index_fname_th']          = 'Prénom';
 $lang['index_lname_th']          = 'Nom';
 $lang['index_email_th']          = 'Email';
+$lang['index_code_id_th']        = 'id code';
 $lang['index_groups_th']         = 'Groupes';
 $lang['index_status_th']         = 'Statut';
 $lang['index_action_th']         = 'Action';

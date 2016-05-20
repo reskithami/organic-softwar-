@@ -63,6 +63,15 @@ class Order_product extends MY_Sublimecontroller {
                 return false;
             $this->order_product_model->_multi_delete_form_order($order_id);
         }
+        
+        function _get_total_from_order_and_type($order_id = NULL, $type = NULL)
+        {
+            if($order_id == NULL && $type == NULL)
+                return FALSE;
+            
+            return $this->order_product_model->total_price(array('order_id' => $order_id, 'type_product' => $type));
+            
+        }
 
 }
 ?>

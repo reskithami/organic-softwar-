@@ -21,6 +21,7 @@
 
                                     $price = $row->sale_price;
                                     
+                                    
                                     $sum_price = $row->total;
                                     $total_price += $sum_price;
 

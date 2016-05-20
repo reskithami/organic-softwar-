@@ -100,6 +100,7 @@ class Cartitem extends MY_Sublimecontroller {
 		}
 		else
 		{
+                    
                         $data['quantity'] = $cart_item->quantity + $data['quantity'];
                         $data['total'] = $this->_set_price_item($data);
 			return $this->cartitem_model->_update($cart_item->cart_item_id, $data);
@@ -112,8 +113,9 @@ class Cartitem extends MY_Sublimecontroller {
             
                 $quantity = $data['quantity'];
                 $price = $data['price'];
+                
 
-                if($data['type_product'] == 'location' && $data['end_date'] == '0000-00-00 00:00:00' )
+                if($data['type_product'] == 'location' && ($data['end_date'] == '0000-00-00 00:00:00' || $data['end_date'] == ''))
                 {
                     $price = 0;
                 }
@@ -174,7 +176,18 @@ class Cartitem extends MY_Sublimecontroller {
                 elseif($_SERVER['REQUEST_METHOD'] == 'POST') { '';
                     $date_end = $this->input->post('date_end') != '' ? date('Y-m-d H:i:s', strtotime (($this->input->post('date_end')))): '';
                 }
-		return $this->cartitem_model->_update($cart_item_id, array('end_date'=>$date_end));		
+                $item = $this->cartitem_model->get_where('cart_item_id', $cart_item_id)->row();
+                
+                $data = array(
+                    'type_product' => $item->type_product,
+                    'quantity' => $item->quantity,
+                    'price' => $item->price,
+                    'start_date' => $item->start_date,
+                    'end_date' => $date_end
+                        );
+                $total = $this->_set_price_item($data);
+                
+		return $this->cartitem_model->_update($cart_item_id, array('end_date' => $date_end, 'total' => $total));		
 	}
         
         

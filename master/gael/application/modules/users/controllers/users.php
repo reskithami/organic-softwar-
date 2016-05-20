@@ -132,6 +132,7 @@ class Users extends MY_Sublimecontroller {
 				$last_name = $this->input->post('last_name');
 				$company = $this->input->post('company');
 				$phone = $this->input->post('phone');
+				$code_id = $this->input->post('code_id');
 				
 
                 $data = array('ip_address'=>$ip_address,'username'=>$username,'password'=>$password,'salt'=>$salt,'email'=>$email,'activation_code'=>$activation_code,'forgotten_password_code'=>$forgotten_password_code,'forgotten_password_time'=>$forgotten_password_time,'remember_code'=>$remember_code,'created_on'=>$created_on,'last_login'=>$last_login,'active'=>$active,'first_name'=>$first_name,'last_name'=>$last_name,'company'=>$company,'phone'=>$phone);

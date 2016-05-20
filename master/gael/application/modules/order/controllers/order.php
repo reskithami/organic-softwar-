@@ -60,13 +60,12 @@ class Order extends MY_Sublimecontroller {
 
             $this->load->library("pagination");
             $this->pagination->initialize($config);
-
+            
             $data = array(
                 "order_records" => $order,
                 "q" => $q,
                 "date_start" => $date_start,
                 "date_end" => $date_end,
-                "pagination" => $this->pagination->create_links(),
                 "total_rows" => $config["total_rows"],
                 "total_price" => $config["total_price"],
                 "start" => $start,

@@ -53,6 +53,17 @@ class Order_product_model extends MY_Sublimemodel {
         $this->db->where('order_id', $order_id);
         $this->db->delete($this->_table);
     }
+    
+        
+         // get total rows
+    function total_price($where = NULL) 
+	{
+                if ($where)
+                    $this->db->where($where);
+                
+		return $this->db->select_sum('total')->get($this->_table)->row()->total;  
+	}
+	
 
 
 }

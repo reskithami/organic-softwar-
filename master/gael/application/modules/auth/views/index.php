@@ -14,6 +14,7 @@
 		<th><?php echo lang('index_fname_th');?></th>
 		<th><?php echo lang('index_lname_th');?></th>
 		<th><?php echo lang('index_email_th');?></th>
+		<th><?php echo lang('index_code_id_th');?></th>
 		<th><?php echo lang('index_groups_th');?></th>
 		<th><?php echo lang('index_status_th');?></th>
 		<th><?php echo lang('index_action_th');?></th>
@@ -25,6 +26,7 @@
 			<td><?php echo $user->first_name;?></td>
 			<td><?php echo $user->last_name;?></td>
 			<td><?php echo $user->email;?></td>
+			<td><?php echo $user->code_id;?></td>
 			<td>
 				<?php foreach ($user->groups as $group):?>
 					<?php echo anchor("auth/edit_group/".$group->id, $group->name) ;?><br />
