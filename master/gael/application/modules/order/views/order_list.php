@@ -30,6 +30,9 @@
                         </span>
                     </div>
                 </form>
+                <?php echo $this->lang->line('total_cours') . '  ' . numberformat($total_price_cours->total, $this->lang->lang());?>
+                <?php echo $this->lang->line('total_location') . '  ' . numberformat($total_price_location->total, $this->lang->lang());?>
+                <?php echo $this->lang->line('total_vente') . '  ' . numberformat($total_price_vente->total, $this->lang->lang());?>
                 <?php echo $this->lang->line('total') . '  ' . numberformat($total_price->total, $this->lang->lang());?>
             </div>
         </div>
@@ -53,21 +56,8 @@
 						</tr>
                     </thead>
                     <tbody>
-	                    <?php   
-                            
-                            $total_cours = 0;
-                            $total_location = 0;
-                            $total_vente = 0;
+	                    <?php                                                    
 						    $num = 0; if(isset($order_records)) :foreach($order_records as $row): $num++;
-                                                    
-                            $sum_cours =  Modules::run('order_product/_get_total_from_order_and_type', $row->order_id, 'cours');
-                            $sum_location =  Modules::run('order_product/_get_total_from_order_and_type', $row->order_id, 'location');
-                            $sum_vente =  Modules::run('order_product/_get_total_from_order_and_type', $row->order_id, 'vente');
-                            
-                            $total_cours += $sum_cours;
-                            $total_location += $sum_location;
-                            $total_vente += $sum_vente;
-                                                    
 						?>
 						<tr>
 							<td></td>
@@ -79,7 +69,6 @@
 							<td><?php echo $row->lastname; ?></td>
 							<td><?php echo $row->email; ?></td>
 							<td><?php echo $row->phone; ?></td>
-							<td><?php echo $row->total; ?></td>
 							<td><?php echo $row->date_added; ?></td>
 							<td><?php echo $row->date_modified; ?></td>
 							<td>
@@ -93,12 +82,7 @@
 						<?php endif; ?>
                     </tbody>
             	</table>
-                          
             <div class="col-md-6 text-right">
-                <?php //echo $pagination; ?>
-            </div>  
+                <?php echo $pagination; ?>
+            </div>
 			</div>
-                <?php echo $this->lang->line('total_cours') . '  ' . numberformat($total_cours, $this->lang->lang());?>
-                <?php echo $this->lang->line('total_location') . '  ' . numberformat($total_location, $this->lang->lang());?>
-                <?php echo $this->lang->line('total_vente') . '  ' . numberformat($total_vente, $this->lang->lang());?>
-                <?php echo $this->lang->line('total') . '  ' . numberformat($total_price->total, $this->lang->lang());?>

@@ -61,13 +61,24 @@ class Order extends MY_Sublimecontroller {
             $this->load->library("pagination");
             $this->pagination->initialize($config);
             
+            $where['type_product'] = 'cours';
+            $totalPrice["total_price_cours"] = $this->order_model->order_sum($q, $where);
+            $where['type_product'] = 'location';
+            $totalPrice["total_price_location"] = $this->order_model->order_sum($q, $where);
+            $where['type_product'] = 'vente';
+            $totalPrice["total_price_vente"] = $this->order_model->order_sum($q, $where);
+
             $data = array(
                 "order_records" => $order,
                 "q" => $q,
                 "date_start" => $date_start,
                 "date_end" => $date_end,
+                "pagination" => $this->pagination->create_links(),
                 "total_rows" => $config["total_rows"],
                 "total_price" => $config["total_price"],
+                "total_price_cours" => $totalPrice["total_price_cours"],
+                "total_price_location" => $totalPrice["total_price_location"],
+                "total_price_vente" => $totalPrice["total_price_vente"],
                 "start" => $start,
             );
             $this->load->view("order_list", $data);

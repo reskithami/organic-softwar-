@@ -16,11 +16,21 @@ class Order_model extends MY_Sublimemodel {
 
 	public function order_info()
 	{
-        $this->db->join('users AS customer', 'customer.id = order.customer_id','LEFT');
-        $this->db->join('users AS saller', 'saller.id = order.saller_id', 'LEFT');
-        $this->db->select('order.*, saller.first_name AS saller_first_name, saller.last_name AS saller_last_name, customer.first_name AS customer_first_name, customer.last_name AS customer_last_name');
+            $this->db->join('users AS customer', 'customer.id = order.customer_id','LEFT');
+            $this->db->join('users AS saller', 'saller.id = order.saller_id', 'LEFT');
+            $this->db->select('order.*, saller.first_name AS saller_first_name, saller.last_name AS saller_last_name, customer.first_name AS customer_first_name, customer.last_name AS customer_last_name');
 
-        return $this;
+            return $this;
+	}
+	public function order_sum($q = NULL, $where = NULL)
+	{
+            $this->db->join('order_product ', 'order.order_id = order_product.order_id','RIGHT');
+            if ($q)
+                $this->like_all_filds($q);
+            if ($where)
+                $this->db->where($where);
+
+            return $this->db->select_sum('order_product.total')->get($this->_table)->row(); 
 	}
 	
 	function like_all_filds($q) 
