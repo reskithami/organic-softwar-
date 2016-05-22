@@ -451,6 +451,7 @@ class '.ucfirst($this->controller_name).' extends MY_Sublimecontroller {
         $start = intval($this->uri->segment(5));
         $config["uri_segment"] = 5;
         
+		// todo find a more academics way
         if(!$q)
         {
            $q = \'-----\';
