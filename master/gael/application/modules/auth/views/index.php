@@ -7,6 +7,15 @@
 
 <p><?php echo anchor('auth/create_user', lang('index_create_user_link'), array('class' => 'btn btn-default')); ?>
  &nbsp; <?php echo anchor('auth/create_group', lang('index_create_group_link'), array('class' => 'btn btn-default')); ?></p>
+<?php echo form_open();
+echo form_input(array(
+              'name'        => 'q',
+              'id'          => 'q',
+              'value'       => set_value('q', $q),
+            ));
+echo form_submit('mysubmit', 'search');
+echo form_close();
+?>
 
 <table class="table table-striped table-hover">
     <thead>

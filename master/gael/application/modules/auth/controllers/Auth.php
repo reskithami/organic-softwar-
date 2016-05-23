@@ -31,6 +31,25 @@ class Auth extends CI_Controller {
 		}
 		else
 		{
+                    $this->load->library('session');
+                    
+                    if ($this->input->post('q'))
+                    {
+                        $q = $this->input->post('q');
+                        $this->session->set_flashdata('q', $q);
+                        redirect("auth/index/");
+                    }
+                    elseif($this->session->flashdata('q'))
+                    {
+                        $q = $this->session->flashdata('q');
+                        $this->session->set_flashdata('q', $q);
+                    }
+                    else
+                    {
+                        $q = '';
+                    }
+                    $this->data['q'] = $q;
+                    
                     $config["base_url"] = base_url() . "auth/index/";
                     $config["first_url"] = base_url() . "auth/index/";
                     $config["per_page"] = 10;
@@ -41,14 +60,14 @@ class Auth extends CI_Controller {
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			//list the users
-                        $this->ion_auth->users();
+                        $this->ion_auth->like(array('first_name' => $q, 'last_name' => $q))->users();
                         $config["total_rows"] = $this->ion_auth->num_rows();
                         
                         
                         $this->ion_auth->limit($config["per_page"]);
                         $this->ion_auth->offset($start);
                         $this->ion_auth->order_by('last_name', 'ASC');
-			$this->data['users'] = $this->ion_auth->users()->result();
+			$this->data['users'] = $this->ion_auth->like(array('first_name' => $q, 'last_name' => $q))->users()->result();
                         
                         
 			foreach ($this->data['users'] as $k => $user)

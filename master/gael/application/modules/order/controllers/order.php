@@ -33,7 +33,8 @@ class Order extends MY_Sublimecontroller {
 
             $start = intval($this->uri->segment(7));
             $config["uri_segment"] = 7;
-
+            
+            // todo find a more academics way
             if(!$q)
                $q = '-----';
             if(!$date_start)

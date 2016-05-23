@@ -33,7 +33,12 @@
 
 					<!-- Logo -->
 						<div id="logo">
-							<span class="image avatar48"><img src="<?php echo site_url("assets/admin/images/standup_paddle_icone_bleu.png");?>" alt="" /></span>
+						
+                                                    <a href='/'>
+                                                        <span class="image avatar48">
+                                                            <img src="<?php echo site_url("assets/admin/images/standup_paddle_icone_bleu.png");?>" alt="" />
+                                                        </span>
+                                                    </a>
 							<h1 id="title"><?php if($logedUser) echo $logedUser->first_name;?></h1>
 							<p>Hyperspace Engineer</p>
 						</div>
