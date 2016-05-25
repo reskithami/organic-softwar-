@@ -16,29 +16,29 @@ class Tax extends MY_Sublimecontroller {
             echo $this->lang->line('success');
 	}
 	
-	function _index()
+	function _index($start = 0)
 	{
         $this->load->helper('encode');
-        $q = $this->input->post('q');
-		if($q === '')
-        {
-            $q = urldecode($this->uri->segment(4));           
-        }
-		
-        $start = intval($this->uri->segment(5));
-        $config["uri_segment"] = 5;
         
-        if(!$q)
-        {
-           $q = '-----';
-        }
-        $config["base_url"] = base_url() . "order/index/" . urlencode($q) . '/';
-        $config["first_url"] = base_url() . "order/index/" . urlencode($q) . '/';
+            
+            if ($this->input->post('bttsearch'))
+            {
+                $q = $this->input->post('query_tax');
+                $this->session->set_flashdata('query_tax', $q);
+                redirect($this->input->server("REQUEST_URI"));
+            }
+            elseif($this->session->flashdata('query_tax'))
+            {
+                $q = $this->session->flashdata('query_tax');
+                $this->session->set_flashdata('query_tax', $q);
+            }
+            else
+            {
+                $q = '';
+            }
+        $config["base_url"] = base_url() . "order/index/";
+        $config["first_url"] = base_url() . "order/index/";
         
-        if($q === '-----')
-        {
-            $q = '';
-        }
         
         $config["per_page"] = 10;
         $config["total_rows"] = $this->tax_model->total_rows($q);

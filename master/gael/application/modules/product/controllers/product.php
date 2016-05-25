@@ -30,29 +30,28 @@ class Product extends MY_Sublimecontroller {
 		$this->load->view('read_type_product',$data);
 	}
 	
-	function _index()
+	function _index($start = 0)
 	{
             $this->load->helper('encode');
-            $q = $this->input->post('q');
-            if($q === '')
+            
+            if ($this->input->post('bttsearch'))
             {
-                $q = urldecode($this->uri->segment(4));           
+                $q = $this->input->post('query_product');
+                $this->session->set_flashdata('query_product', $q);
+                redirect($this->input->server("REQUEST_URI"));
             }
-
-            $start = intval($this->uri->segment(5));
-            $config["uri_segment"] = 5;
-
-            if(!$q)
+            elseif($this->session->flashdata('query_product'))
             {
-               $q = '-----';
+                $q = $this->session->flashdata('query_product');
+                $this->session->set_flashdata('query_product', $q);
             }
-            $config["base_url"] = base_url() . "product/index/" . urlencode($q) . '/';
-            $config["first_url"] = base_url() . "product/index/" . urlencode($q) . '/';
-
-            if($q === '-----')
+            else
             {
                 $q = '';
             }
+            
+            $config["base_url"] = base_url() . "product/index/";
+            $config["first_url"] = base_url() . "product/index/";
 
             $config["per_page"] = 10;
             $config["total_rows"] = $this->product_model->total_rows($q);

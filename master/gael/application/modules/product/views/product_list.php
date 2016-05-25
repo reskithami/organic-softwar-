@@ -14,17 +14,9 @@
             <div class="col-md-8 text-right">
                 <?php echo form_open("/product/index/", array('class' => 'listeSearch')); ?>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+                        <input type="text" class="form-control" name="query_product" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
-                            <?php 
-                                if ($q <> "")
-                                {
-                                    ?>
-                                    <a href="/product/index/" class="btn btn-default list_reset"><?php echo $this->lang->line('reset');?></a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit"><?php echo $this->lang->line('search');?></button>
+                          <input class="btn btn-primary" type="submit" name="bttsearch" value="<?php echo $this->lang->line('search');?>">
                         </span>
                     </div>
                 </form>

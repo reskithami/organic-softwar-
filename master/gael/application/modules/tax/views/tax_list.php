@@ -14,17 +14,9 @@
             <div class="col-md-6 text-right">
                 <?php echo form_open("/tax/index/", array('class' => 'listeSearch')); ?>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+                        <input type="text" class="form-control" name="query_tax" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
-                            <?php 
-                                if ($q <> "")
-                                {
-                                    ?>
-                                    <a href="/tax/index/" class="btn btn-default list_reset"><?php echo $this->lang->line('reset');?></a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit"><?php echo $this->lang->line('search');?></button>
+                          <input class="btn btn-primary" type="submit" value="<?php echo $this->lang->line('search');?>" name="bttsearch">
                         </span>
                     </div>
                 </form>

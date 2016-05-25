@@ -16,9 +16,9 @@
                         <input type="text" class="form-control" name="date_end" value="<?php echo $date_end; ?>">
                     </div>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+                        <input type="text" class="form-control" name="query_order" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
-                          <button class="btn btn-primary" type="submit"><?php echo $this->lang->line('search');?></button>
+                            <input class="btn btn-primary" type="submit" name="bttsearch" value="<?php echo $this->lang->line('search');?>">
                         </span>
                     </div>
                 </form>

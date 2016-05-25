@@ -22,6 +22,7 @@ class Order_model extends MY_Sublimemodel {
 
             return $this;
 	}
+        
 	public function order_sum($q = NULL, $where = NULL)
 	{
             $this->db->join('order_product ', 'order.order_id = order_product.order_id','RIGHT');

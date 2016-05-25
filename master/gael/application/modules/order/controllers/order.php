@@ -21,38 +21,38 @@ class Order extends MY_Sublimecontroller {
             $start = intval($start);
             $this->load->helper(array('encode','number'));
             
-             if ($this->input->post('q') || $this->input->post('date_start') || $this->input->post('date_end'))
-                    {
-                        $q = $this->input->post('q');
-                        $this->session->set_flashdata('q', $q);
-                        
-                        $date_start = $this->input->post('date_start');
-                        $this->session->set_flashdata('date_start', $date_start);
-                        
-                        $date_end = $this->input->post('date_end');
-                        $this->session->set_flashdata('date_end', $date_end);
-                        
-                        
-                        redirect($_SERVER['REQUEST_URI']);
-                    }
-                    elseif($this->session->flashdata('q') || $this->session->flashdata('date_start') || $this->session->flashdata('date_end'))
-                    {
-                        
-                        $q = $this->session->flashdata('q');
-                        $this->session->set_flashdata('q', $q);
-                        
-                        $date_start = $this->session->flashdata('date_start');
-                        $this->session->set_flashdata('date_start', $date_start);
-                        
-                        $date_end = $this->session->flashdata('date_end');
-                        $this->session->set_flashdata('date_end', $date_end);
-                    }
-                    else
-                    {
-                        $q = '';
-                        $date_start = date('Y-m-d');
-                        $date_end = date('Y-m-d');
-                    }
+            if ($this->input->post('bttsearch'))
+            {
+                $q = $this->input->post('query_order');
+                $this->session->set_flashdata('query_order', $q);
+
+                $date_start = $this->input->post('date_start');
+                $this->session->set_flashdata('date_start', $date_start);
+
+                $date_end = $this->input->post('date_end');
+                $this->session->set_flashdata('date_end', $date_end);
+
+
+                redirect($this->input->server('REQUEST_URI'));
+            }
+            elseif($this->session->flashdata('query_order') || $this->session->flashdata('date_start') || $this->session->flashdata('date_end'))
+            {
+
+                $q = $this->session->flashdata('query_order');
+                $this->session->set_flashdata('query_order', $q);
+
+                $date_start = $this->session->flashdata('date_start');
+                $this->session->set_flashdata('date_start', $date_start);
+
+                $date_end = $this->session->flashdata('date_end');
+                $this->session->set_flashdata('date_end', $date_end);
+            }
+            else
+            {
+                $q = '';
+                $date_start = date('Y-m-d');
+                $date_end = date('Y-m-d');
+            }
 
             $config["base_url"] = base_url() . "order/index/" ;
             $config["first_url"] = base_url() . "order/index/" ;

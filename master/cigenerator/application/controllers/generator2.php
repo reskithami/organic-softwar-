@@ -442,19 +442,19 @@ class '.ucfirst($this->controller_name).' extends MY_Sublimecontroller {
             echo $this->lang->line(\'success\');
 	}
 	
-	function _index()
+	function _index($start = 0)
 	{
         $this->load->helper(\'encode\');
-        if ($this->input->post("q"))
+        if ($this->input->post("q' . $this->object_name . '"))
 		{
-			$q = $this->input->post("q");
-			$this->session->set_flashdata("q", $q);
-			redirect($_SERVER["REQUEST_URI"]);
+			$q = $this->input->post("q' . $this->object_name . '");
+			$this->session->set_flashdata("q' . $this->object_name . '", $q);
+			redirect($this->input->server("REQUEST_URI"));
 		}
-		elseif($this->session->flashdata("q"))
+		elseif($this->session->flashdata("q' . $this->object_name . '"))
 		{
-			$q = $this->session->flashdata("q");
-			$this->session->set_flashdata("q", $q);
+			$q = $this->session->flashdata("q' . $this->object_name . '");
+			$this->session->set_flashdata("q' . $this->object_name . '", $q);
 		}
 		else
 		{
@@ -1263,17 +1263,9 @@ class '.ucfirst($this->controller_name).' extends MY_Sublimecontroller {
             <div class="col-md-6 text-right">
                 <?php echo form_open("/' .$this->object_name .'/index/", array(\'class\' => \'listeSearch\')); ?>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+                        <input type="text" class="form-control" name="q' . $this->object_name . '" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
-                            <?php 
-                                if ($q <> "")
-                                {
-                                    ?>
-                                    <a href="/' .$this->object_name .'/index/" class="btn btn-default list_reset"><?php echo $this->lang->line(\'reset\');?></a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit"><?php echo $this->lang->line(\'search\');?></button>
+                          <input class="btn btn-primary" type="submit" name="bttsearch" value="<?php echo $this->lang->line(\'search\');?>">
                         </span>
                     </div>
                 </form>
