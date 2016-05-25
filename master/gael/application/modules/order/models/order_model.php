@@ -35,29 +35,17 @@ class Order_model extends MY_Sublimemodel {
 	
 	function like_all_filds($q) 
 	{
-		
-		 $this->db->like("order.invoice_no", $q);
-		 $this->db->or_like("order.invoice_prefix", $q);
-		 $this->db->or_like("order.order_status_array_id", $q);
-		 $this->db->or_like("order.customer_id", $q);
-		 $this->db->or_like("order.saller_id", $q);
-		 $this->db->or_like("order.firstname", $q);
-		 $this->db->or_like("order.lastname", $q);
-		 $this->db->or_like("order.email", $q);
-		 $this->db->or_like("order.phone", $q);
-		 $this->db->or_like("order.payment_firstname", $q);
-		 $this->db->or_like("order.payment_lastname", $q);
-		 $this->db->or_like("order.payment_company", $q);
-		 $this->db->or_like("order.comment", $q);
-		 $this->db->or_like("order.total", $q);
-		 $this->db->or_like("order.commission", $q);
-		 $this->db->or_like("order.tracking", $q);
-		 $this->db->or_like("order.language_code", $q);
-		 $this->db->or_like("order.currency_code", $q);
-		 $this->db->or_like("order.currency_value", $q);
-		 $this->db->or_like("order.ip", $q);
-		 $this->db->or_like("order.date_added", $q);
-		 $this->db->or_like("order.date_modified", $q);
+		$this->db->group_start();
+		$this->db->like("order.invoice_no", $q);
+		$this->db->or_like("order.invoice_prefix", $q);
+		$this->db->or_like("order.order_status_array_id", $q);
+		$this->db->or_like("order.customer_id", $q);
+		$this->db->or_like("order.firstname", $q);
+		$this->db->or_like("order.lastname", $q);
+		$this->db->or_like("order.email", $q);
+		$this->db->or_like("order.phone", $q);
+		$this->db->or_like("order.date_modified", $q);
+		$this->db->group_end();
 
 		return $this;
 	}

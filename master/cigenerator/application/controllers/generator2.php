@@ -290,18 +290,21 @@ class '.ucfirst($this->model_name).' extends MY_Sublimemodel {
 	
 	function like_all_filds($q) 
 	{
+		$this->db->group_start();
 		'. "\n";
 		$i = 0;
 		foreach($this->selected_attribute as $key => $value)
 		{
 			if($i == 0){
-				$model .= "\t\t".' $this->db->like("' . $this->table_name . '.' . $value . '", $q);' . "\n";
+				$model .= "\t\t".'$this->db->like("' . $this->table_name . '.' . $value . '", $q);' . "\n";
 				$i++;
 			}
 			else
-				$model .= "\t\t".' $this->db->or_like("' . $this->table_name . '.' . $value . '", $q);' . "\n";
+				$model .= "\t\t".'$this->db->or_like("' . $this->table_name . '.' . $value . '", $q);' . "\n";
 		}
 		$model .= '
+		$this->db->group_end();
+		
 		return $this;
 	}
 	
@@ -442,27 +445,25 @@ class '.ucfirst($this->controller_name).' extends MY_Sublimecontroller {
 	function _index()
 	{
         $this->load->helper(\'encode\');
-        $q = $this->input->post(\'q\');
-		if($q === \'\')
-        {
-            $q = urldecode($this->uri->segment(4));           
-        }
+        if ($this->input->post("q"))
+		{
+			$q = $this->input->post("q");
+			$this->session->set_flashdata("q", $q);
+			redirect($_SERVER["REQUEST_URI"]);
+		}
+		elseif($this->session->flashdata("q"))
+		{
+			$q = $this->session->flashdata("q");
+			$this->session->set_flashdata("q", $q);
+		}
+		else
+		{
+			$q = "";
+		}
 		
-        $start = intval($this->uri->segment(5));
-        $config["uri_segment"] = 5;
+        $config["base_url"] = base_url() . "order/index/";
+        $config["first_url"] = base_url() . "order/index/";
         
-		// todo find a more academics way
-        if(!$q)
-        {
-           $q = \'-----\';
-        }
-        $config["base_url"] = base_url() . "order/index/" . urlencode($q) . \'/\';
-        $config["first_url"] = base_url() . "order/index/" . urlencode($q) . \'/\';
-        
-        if($q === \'-----\')
-        {
-            $q = \'\';
-        }
         
         $config["per_page"] = 10;
         $config["total_rows"] = $this->' . $this->model_name . '->total_rows($q);

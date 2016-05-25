@@ -18,14 +18,6 @@
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
-                            <?php 
-                                if ($q <> "")
-                                {
-                                    ?>
-                                    <a href="/order/index/" class="btn btn-default list_reset"><?php echo $this->lang->line('reset');?></a>
-                                    <?php
-                                }
-                            ?>
                           <button class="btn btn-primary" type="submit"><?php echo $this->lang->line('search');?></button>
                         </span>
                     </div>

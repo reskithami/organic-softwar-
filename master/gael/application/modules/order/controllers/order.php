@@ -16,44 +16,53 @@ class Order extends MY_Sublimecontroller {
             echo $this->lang->line('success');
 	}
 	
-	function _index()
+	function _index($start = 0)
 	{
+            $start = intval($start);
             $this->load->helper(array('encode','number'));
-            $q = $this->input->post('q');
-            if($q === '')
-                $q = urldecode($this->uri->segment(4)); 
-
-            $date_start = $this->input->post('date_start');
-            if($date_start === '')
-                $date_start = urldecode($this->uri->segment(5)); 
-
-            $date_end = $this->input->post('date_end');
-            if($date_end === '')
-                $date_end = urldecode($this->uri->segment(6)); 
-
-            $start = intval($this->uri->segment(7));
-            $config["uri_segment"] = 7;
             
-            // todo find a more academics way
-            if(!$q)
-               $q = '-----';
-            if(!$date_start)
-               $date_start = date('Y-m-d');
-            if(!$date_end)
-               $date_end = date('Y-m-d');
+             if ($this->input->post('q') || $this->input->post('date_start') || $this->input->post('date_end'))
+                    {
+                        $q = $this->input->post('q');
+                        $this->session->set_flashdata('q', $q);
+                        
+                        $date_start = $this->input->post('date_start');
+                        $this->session->set_flashdata('date_start', $date_start);
+                        
+                        $date_end = $this->input->post('date_end');
+                        $this->session->set_flashdata('date_end', $date_end);
+                        
+                        
+                        redirect($_SERVER['REQUEST_URI']);
+                    }
+                    elseif($this->session->flashdata('q') || $this->session->flashdata('date_start') || $this->session->flashdata('date_end'))
+                    {
+                        
+                        $q = $this->session->flashdata('q');
+                        $this->session->set_flashdata('q', $q);
+                        
+                        $date_start = $this->session->flashdata('date_start');
+                        $this->session->set_flashdata('date_start', $date_start);
+                        
+                        $date_end = $this->session->flashdata('date_end');
+                        $this->session->set_flashdata('date_end', $date_end);
+                    }
+                    else
+                    {
+                        $q = '';
+                        $date_start = date('Y-m-d');
+                        $date_end = date('Y-m-d');
+                    }
 
-            $config["base_url"] = base_url() . "order/index/" . urlencode($q) . '/' . urlencode($date_start) . '/' . urlencode($date_end) . '/';
-            $config["first_url"] = base_url() . "order/index/" . urlencode($q) . '/' . urlencode($date_start) . '/' . urlencode($date_end) . '/';
-
-            if($q === '-----')
-                $q = '';
+            $config["base_url"] = base_url() . "order/index/" ;
+            $config["first_url"] = base_url() . "order/index/" ;
 
             $config["per_page"] = 10;
             $where = array(
                         'DATE(date_added) >= ' => $date_start,
                         'DATE(date_added) <= ' => $date_end          
                             );
-
+            
             $config["total_rows"] = $this->order_model->total_rows($q, $where);
             $config["total_price"] = $this->order_model->total_price($q, $where);
 
@@ -68,6 +77,9 @@ class Order extends MY_Sublimecontroller {
             $totalPrice["total_price_location"] = $this->order_model->order_sum($q, $where);
             $where['type_product'] = 'vente';
             $totalPrice["total_price_vente"] = $this->order_model->order_sum($q, $where);
+            
+            
+            
 
             $data = array(
                 "order_records" => $order,
