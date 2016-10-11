@@ -7,5 +7,6 @@ It is provided with a generator of module based on an existing generator.
 In the next version, I would use the very good library groceryCrud which seems faster and more efficient.
 
 For installation, you just create the data base and edit the url in the file application / config / config.php 
+the framework used is codeigniter
 the library used are Ion_auth and Bcrypt.
 Have fun
